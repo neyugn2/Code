@@ -5,17 +5,13 @@
 
 using namespace std;
 
-void input() {
-
-}
-
 void solve() {
 
 }
 
 int32_t main() {
     fast();
-    input();
     solve();
     return 0;
 }
+
