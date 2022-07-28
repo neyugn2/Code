@@ -8,7 +8,6 @@ using namespace std;
 char a[105], b[105];
 
 void toLower(char* a, char* b) {
-    int sum1 = 0, sum2 = 0;
     int flag = -1;
     while (*a) {
         *a = tolower(*a);
