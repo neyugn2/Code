@@ -11,12 +11,12 @@ string s;
 void solve() {
     char a;
     cin >> n >> t >> s;
-    for (int j = 0; j < t; j++) {
-        for (int i = n; i > 0; i--) {
+    while (t--) {
+        for (int i = 1; i < n; i++) {
             if (s[i] == 'G' && s[i-1] == 'B') {
-                a = s[i];
-                s[i] = s[i-1];
-                s[i-1] = a;
+                s[i] = 'B';
+                s[i-1] = 'G';
+                i++;
             }
         }
     }
