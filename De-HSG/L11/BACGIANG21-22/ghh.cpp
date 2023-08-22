@@ -21,7 +21,7 @@ int main() {
 
     for (int i = 1; i <= maxNum; i++) 
         for (int j = i; j <= maxNum; j += i)
-            sumDiv[j] += i;
+            sumDiv[j] += i;     
 
     for (int i = 1; i <= n; i++) {
         if (sumDiv[a[i]] >= 2 * a[i]) cout << 1 << "\n";
