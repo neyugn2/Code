@@ -3,8 +3,11 @@
 using namespace std;
 
 int main() {
-    //freopen("a.inp", "r", stdin);
-    //freopen("a.out", "w", stdout);
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL); cout.tie(NULL);
+
+    freopen("ghh.inp", "r", stdin);
+    freopen("ghh.out", "w", stdout);
 
     int n; cin >> n;
     int a[n+1], maxNum = 0;
