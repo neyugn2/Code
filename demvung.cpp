@@ -1,43 +1,63 @@
-#include <bits/stdc++.h>
-
+#include<bits/stdc++.h>
 using namespace std;
 
 int m, n;
-int board[21][21];
-bool prime[100001];
+bool prime[105][105];
+int a[105][105];
+const int N = 1e3 + 5, dx[4] = {0, 0, 1, -1}, dy[4]{1, -1, 0, 0};
+int mark[105][105];
+vector<int> ans;
 
-void sievePrime() {
-    memset(prime, 1, sizeof(prime));
-    prime[0] = prime[1] = 0;
-    for (int i = 2; i * i <= 100000; i++) {
-        if (prime[i] == 1)
-            for (int j = i * i; j <= 100000; j += i)
-                prime[j] = 0;
-    }
-}
-
-void backTrack(int i) {
-
-}
-
-int main() {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL); cout.tie(NULL);
-    freopen("demvung.inp", "r", stdin);
-    freopen("demvung.out", "w", stdout);
-
-    cin >> m >> n;
-    sievePrime();
-    for (int i = 1; i <= m; i++)
-        for (int j = 1; j <= n; j++) {
-            cin >> board[i][j];
-            if (prime[board[i][j]] == 1)
-                board[i][j] = 0;
+void isPrime()
+{
+    memset(prime, false, sizeof(prime));
+    for(int i = 1; i <= m; i++)
+    {
+        for(int j = 1; j <= n; j++)
+        {
+            if(a[i][j] <= 1)
+                prime[i][j] = true;
+            else
+            {
+                for(int k = 2; k*2 <= a[i][j]; k++)
+                    if(a[i][j] % k == 0)
+                        prime[i][j] = true;
+            }
         }
-    for (int i = 1; i <= m; i++) {
-        for (int j = 1; j <= n; j++)
-            cout << board[i][j] << " ";
-        cout << "\n";
     }
+}
+
+
+int Loang(int x, int y){
+    int res = 0;
+    queue<pair<int, int>> q;
+    q.push({x, y});
+    mark[x][y] = 1;
+    while(!q.empty()){
+        int x = q.front().first, y = q.front().second;
+        q.pop();
+        res++;
+        for(int i = 0 ; i < 4 ; ++i)
+        if(x + dx[i] > 0 && x + dx[i] <= m && y + dy[i] > 0 && y + dy[i] <= n && prime[x + dx[i]][y + dy[i]] == false && !mark[x + dx[i]][y + dy[i]]){
+            q.push({x + dx[i], y + dy[i]});
+            mark[x + dx[i]][y + dy[i]] = 1;
+        }
+    }
+    return res;
+}
+
+
+int main(){
+    freopen("demvung.inp","r",stdin);
+    freopen("demvung.out","w",stdout);
+    cin >> m >> n;
+    for(int i = 1 ; i <= m ; i++)
+    for(int j = 1 ; j <= n ; j++) cin >> a[i][j];
+    isPrime();
+    for(int i = 1 ; i <= m ; i++)
+    for(int j = 1 ; j <= n ; j++)
+    if(prime[i][j] == false && !mark[i][j])
+        ans.push_back(Loang(i, j));
+    cout << ans.size() << endl;
     return 0;
 }
